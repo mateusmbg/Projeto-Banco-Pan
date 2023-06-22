@@ -1,0 +1,47 @@
+/* define a altura do body como 100% da viewport */
+body {
+    font-family: var(--font-family);
+    height: 100vh;
+}
+/* define a altura do main como 90% da viewport*/
+main {
+    height: 90vh;
+    display: flex;
+}
+/* div com com a barra de pesquisa e o título centralizados */
+.search {
+    margin: auto;
+    width: 60%;
+    justify-items: center;
+}
+/* estiliza o título do panpedia */
+.search h1 {
+    text-align: center;
+    color: var(--color-primary);
+    font-size: var(--font-size-mega);
+}
+/* ponteiro que indica que a lupa pode ser clicada */
+.search i{
+    cursor: pointer;
+}
+/* div com com a barra de pesquisa */
+.pesquisaInput {
+    padding: 1rem 1.5rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 200px;
+    color: var(--color-primary);
+}
+/* input para a pesquisa */
+input[type="text"] {
+    margin-left: 0.7rem;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    width: 90%;
+    font-size: 20px;
+}
+/* texto que o usuário escreveu no input */
+.textPesquisa {
+    font-family: var(--font-family);
+    color: var(--color-grey-dark);
+}

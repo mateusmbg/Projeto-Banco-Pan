@@ -1,0 +1,119 @@
+/* define a cor html com a variável --color-white */
+html {
+    background-color: var(--color-white);
+}
+/* define a altura mínima do body como 100% da viewport */
+body {
+    min-height: 100vh;
+}
+/* define a largura de 90% e centraliza a main */
+main {
+    width: 90%;
+    margin: auto;
+}
+/* classe onde há titulo da tela "Tickets"  */
+.ticketsTitulo {
+    display: flex;
+    color: var(--color-primary);
+    align-items: baseline;
+    justify-content: center;
+    padding-top: 4rem;
+}
+/* define o estilo do texto do titulo */
+.ticketsTitulo h1 {
+    font-size: var(--font-size-large);
+    margin-left: 0.7rem;
+}
+/* define o estilo do icone do titulo */
+.ticketsTitulo i {
+    font-size: var(--font-size-medium);
+}
+/* define as propriedades de estilo para a classe ticketPendente */
+.ticketPendente {
+    padding: 1rem;
+    border: 1px solid var(--color-primary);
+    border-radius: 20px;
+    margin-top: 1rem;
+}
+/* define o tamanho da fonte e a cor para a classe infoTickets */
+.infoTickets {
+    font-size: var(--font-size-smallest);
+    color: var(--color-grey-dark);
+}
+/*  estilo da div com titulo da tabela e o botão de editar*/
+.topoTicket {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2rem;
+    color: var(--color-grey-dark);
+}
+/*  define o estilo do titulo da tabela */
+.ticketsSolicitados h2 {
+    font-size: var(--font-size-small);
+    color: var(--color-grey-dark);
+}
+/*  define o estilo do icone de editar tabela */
+.fa-pen-to-square {
+    display: flex;
+    justify-content: end;
+    font-size: var(--font-size-large);
+    color: var(--color-primary);
+}
+/* div onde está o resumo de alterações e o update query */
+.conteudoTicket {
+    overflow: hidden;
+    margin-top: 4rem;
+    transition: 1s;
+}
+
+.conteudoTicket p {
+    font-size: var(--font-size-small);
+    transition: 1s;
+}
+/* esconde o modelo de ticket */
+#ticketModelo {
+    display: none;
+}
+/* classe com os botões de aprovar, apagar e ver ticket */
+.escolhaOwner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3rem;
+}
+/* define as propriedades dos botões */
+.escolhaOwner button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: none;
+    border-radius: 20px;
+}
+/* define o tamanho da fonte, a cor e a margem para o p dentro do botão */
+.escolhaOwner p {
+    font-size: var(--font-size-smallest);
+    color: #FFF;
+    margin: 0.3rem;
+}
+/* define o tamanho, a cor e a margem do icone dentro do botao*/
+.escolhaOwner i {
+    font-size: var(--font-size-small);
+    color: #FFF;
+    margin: 0.3rem;
+}
+/* define o estilo do botão de rejeitar */
+.escolhaRejeitar {
+    background: #FF0000;
+}
+/* define o estilo do botão de aprovar */
+.escolhaAprovar {
+    background: #69E66E;
+    margin-left: 2rem;
+}
+/* define o estilo do botão de ver ticket */
+.verTicket {
+    justify-content: end !important;
+    background: var(--color-primary);
+    right: 0 !important;
+    margin-left: 2rem;
+}

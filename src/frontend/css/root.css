@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+/* inverte as cores branco e preto para modo escuro */
+.darkmode {
+    --font-size-smallest: 14px;
+    --font-size-small: 18px;
+    --font-size-medium: 20px;
+    --font-size-large: 22px;
+    --font-size-mega: 66px;
+
+    --font-family: 'Poppins', sans-serif;
+
+    --color-primary: #07B2FD;
+    --color-primary-click: #3dc5ff;
+    --color-white: #3A404A;
+    --color-grey-dark: #FFFF;
+    --color-grey-light: #424750;
+    --color-hever: #141414;
+    --color-red: #FF0000;
+    background-color: var(--color-white);
+
+    --spacing-small: 10px;
+    --spacing-medium: 16px;
+    --spacing-large: 24px;
+}
+/* fonte e cores padrão */
+:root {
+    --font-size-smallest: 14px;
+    --font-size-small: 18px;
+    --font-size-medium: 20px;
+    --font-size-large: 22px;
+    --font-size-mega: 66px;
+
+    --font-family: 'Poppins', sans-serif !important;
+
+    --color-primary: #07B2FD;
+    --color-primary-click: #3dc5ff;
+    --color-white: #FFFFFF;
+    --color-grey-dark: #3A404A;
+    --color-grey-light: #424750;
+    --color-red: #FF0000;
+    --color-menu: #FFFFFF;
+    --color-hever: #eff1f1;
+    background-color: var(--color-white);
+
+    --spacing-small: 10px;
+    --spacing-medium: 16px;
+    --spacing-large: 24px;
+}
+/* define padrão de tamanho de fonte, cor e margem */
+h1 {
+    font-size: var(--font-size-large);
+    color: var(--color-primary);
+    margin-bottom: var(--spacing-large);
+}
+
+body {
+    background-color: var(--color-white);
+    font-family: var(--font-family);
+}
+
+h2 {
+    font-size: var(--font-size-medium);
+    color: var(--color-grey-dark);
+    margin-bottom: var(--spacing-medium);
+}
+
+p {
+    font-size: var(--font-size-small);
+    line-height: 1.5;
+    color: var(--color-grey-dark);
+    margin-bottom: var(--spacing-medium);
+}
+
+/*==== Scroll Personalizado ====*/
+::-webkit-scrollbar{
+	width: .5vw;
+    background: var(--color-white);
+}
+
+::-webkit-scrollbar-thumb{
+	background: linear-gradient(var(--color-white), var(--color-primary), var(--color-white));
+	border-radius: 10px;
+	transition: .6s ease-in;
+}
+

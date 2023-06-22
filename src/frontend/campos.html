@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/root.css">
+    <link rel="stylesheet" href="css/components/header-menu.css">
+    <link rel="stylesheet" href="css/pages/campos.css">
+    <link rel="stylesheet" href="css/components/submenu-tabela.css">
+    <title id="tituloTabelaPagina">Tabela</title>
+</head>
+
+<body>
+    <header>
+
+        <img class="header-components-img" src="/assets/img/logo_banco_pan.png" alt="Logo Banco Pan" id="logoBancoPan"
+          data-dark-src="/assets/img/logo_banco_pan_dark.png">
+        <a href="index.html" class="linkIndex"><h1 class="header-components">PAN<span style="color: var(--color-grey-dark); font-size: var(--font-size-medium);">PEDIA</span></h1></a>
+        <i id="iconeBars" class="fa-solid fa-bars" onclick="switchMenu()"></i>
+        <nav class="menu menuIsClose" id="menu">
+          <div class="close">
+            <i class="fa-solid fa-circle-xmark" id="iconeFechar" onclick="switchMenu()"></i>
+          </div>
+          <div class="todos-itens">
+            <a class="menuItens" id="atalhoPesquisar">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <h2>Pesquisar</h2>
+            </a>
+            <a class="menuItens">
+              <i class="fa-sharp fa-solid fa-book-open"></i>
+              <h2>Instruções</h2>
+            </a>
+            <a class="menuItens" id="abrirTicketOwner">
+              <i class="fa-sharp fa-solid fa-lock" id="ticketIcon"></i>
+              <h2>Tickets</h2>
+            </a>
+          </div>
+          <div class="theme-cursor" id="button-modo-escuro">
+            <a class="fa-sharp fa-solid fa-circle-half-stroke"></a>
+            <p>Modo Escuro</p>
+          </div>
+        </nav>
+      </header>
+    <main>
+        <h1 id="tituloTabela"></h1>
+        <div class="container-submenu">
+            <div class="feedback" id="divFeedback" style="align-items: center;">
+                <div style="margin-top: 5%;">
+                    <p>Dê seu FeedBack</p>
+                </div>
+                <button title="Curti a tabela.">
+                    <i class="fa-regular fa-thumbs-up"></i>
+                </button>
+                <button title="Não curti a tabela.">
+                    <i class="fa-regular fa-thumbs-down"></i>
+                </button>
+            </div>
+            <div class="general">
+                <a id="Geral" onclick="mudarTelaGeral()">
+                    <p>Geral</p>
+                </a>
+                <a id="Tabela" class="active" onclick="mudarTelaTabela()">
+                    <p>Campos</p>
+                </a>
+            </div>
+            <div class="access" id="divSolicitarAcesso">
+                <button class="btn btn-primary" title="solicitar acesso a tabela">
+                    <p>Solicitar Acesso</p>
+                </button>
+            </div>
+        </div>
+        <div class="table" id="TabelaCorpo">
+            <div class="row">
+                <div class="col-md-3-indice">
+                    Índice
+                </div>
+                <div class="col-md-3-nome">
+                    Nome do Campo
+                </div>
+                <div class="col-md-3-descricao">
+                    Descrição do Campo
+                </div>
+                <div class="col-md-3-maisInfo">
+                    Mais Informações
+                </div>
+            </div>
+            <div class="row" id="LinhaModelo">
+                <div class="col-md-3-indice" id="indice">
+                </div>
+                <div class="col-md-3-nome" id="nomeCampo">
+                </div>
+                <div class="col-md-3-descricao" id="descricaoCampo">
+                </div>
+                <div class="col-md-3-maisInfo">
+                    <i class="fa-solid fa-plus" id="botao"></i>
+                </div>
+            </div>
+            <div class="row additional-info" id="infoAdicional" style="display: none;">
+                <div class="col-md-12 mais-info">
+                    <p>Tipo campo: <span id="tipoCampo"></span></p>
+                    <p>Tipo pessoa: <span id="tipoPessoa"></span></p>
+                    <p>Chave primária: <span id="chavePrimaria"></span></p>
+                    <p>Null campo: <span id="nullCampo"></span></p>
+                    <p>Unq: <span id="unq"></span></p>
+                    <p>Volátil: <span id="volatil"></span></p>
+                    <p>LGPD: <span id="lgpd"></span></p>
+                    <p>Amostra: <span id="amostraCampo"></span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p id="rodape">Encontrou alguma informação incorreta na tabela? <a onclick="solicitarTicket()">Clique aqui</a> para solicitar um ticket</p>
+    </footer>
+
+    <script src="/assets/js/campos.js"></script>
+    <script src="/assets/js/resultadoCampos.js"></script>
+    <script src="/assets/js/menu.js"></script>
+    <script src="/assets/js/modoEscuro.js"></script>
+</body>
+</html>

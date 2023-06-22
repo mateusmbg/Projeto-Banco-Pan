@@ -1,0 +1,116 @@
+/* Título da tabela */
+#tituloTabela {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  color: var(--color-primary);
+}
+/* Título da tabela */
+.container-submenu {
+  height: 15vh;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+}
+/* div que inclui os botoões de curtir ou não */
+.container-submenu .feedback {
+  display: flex;
+}
+
+.container-submenu .feedback button {
+  color: var(--color-grey-dark);
+  background: transparent;
+  margin-left: 1vw;
+  border: none;
+}
+/* div que inclui os botoões de ir para geral e campos */
+.container-submenu .general {
+  position: absolute;
+  justify-self: center;
+  justify-content: space-between;
+  min-width: 13vw;
+  padding-top: .4rem;
+  padding-bottom: .4rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 10px;
+  display: flex;
+  cursor: pointer;
+  -webkit-box-shadow: 2px 6px 10px 0px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 2px 6px 10px 0px rgba(0, 0, 0, 0.3);
+  box-shadow: 2px 6px 10px 0px rgba(0, 0, 0, 0.3);
+}
+
+.container-submenu .general p {
+  margin-bottom: 0;
+}
+
+.container-submenu .general a {
+  text-decoration: none;
+}
+/* destaca o botão da tela onde o usuário ja está */
+.active p {
+  color: var(--color-primary);
+}
+/* div com o botão de solicitar o acesso */
+.container-submenu .access {
+  justify-self: end;
+}
+
+.container-submenu .access .btn {
+  background: var(--color-white);
+  border-radius: 20px;
+  border-color: #07B2FD;
+}
+
+.container-submenu .access .btn:hover {
+  background: var(--color-primary);
+  transition: .4s ease-in;
+}
+
+.container-submenu .access .btn p {
+  margin: 0;
+  color: var(--color-grey-dark);
+  font-size: var(--font-size-small);
+}
+/* avaliação em estrelas da governança */
+.rate {
+  margin-top: 0.4vw;
+  margin-left: 1vw;
+}
+
+.rate:not(:checked)>input {
+  position: absolute;
+  opacity: 0;
+}
+
+.rate:not(:checked)>label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: #ccc;
+}
+
+.rate:not(:checked)>label:before {
+  content: '★ ';
+}
+
+.rate>input:checked~label {
+  color: #ffc700;
+}
+
+.rate:not(:checked)>label:hover,
+.rate:not(:checked)>label:hover~label {
+  color: #deb217;
+}
+
+.rate>input:checked+label:hover,
+.rate>input:checked+label:hover~label,
+.rate>input:checked~label:hover,
+.rate>input:checked~label:hover~label,
+.rate>label:hover~input:checked~label {
+  color: #c59b08;
+}

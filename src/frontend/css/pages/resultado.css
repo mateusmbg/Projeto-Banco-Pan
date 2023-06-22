@@ -1,0 +1,48 @@
+/* define a cor html com a variável --color-white */
+html {
+  background: var(--color-white);
+}
+/* define a largura de 90% da viewport e centraliza a main */
+main {
+  width: 90%;
+  margin: auto;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+/* blocos de conteúdo */
+.content {
+  padding: 1rem;
+  border: 1px solid var(--color-primary);
+  border-radius: 20px;
+  margin-top: 1rem;
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
+/* espaçamento entre linhas */
+.content p {
+  line-height: 1.3;
+}
+
+h2 {
+  text-align: center;
+}
+/* div com os dois blocos de conteúdo de lado a lado */
+.containerJustificado {
+  display: flex;
+  justify-content: space-between;
+}
+
+.data-responsible, .availability-and-update {
+  flex-grow: 1;
+}
+
+/* Rodapé */
+footer {
+  padding-bottom: .5rem;
+  text-align: center;
+}
+
+footer a {
+  cursor: pointer;
+  color: var(--color-primary) !important;
+}

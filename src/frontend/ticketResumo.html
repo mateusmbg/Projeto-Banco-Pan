@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/root.css">
+    <link rel="stylesheet" href="css/components/header-menu.css">
+    <link rel="stylesheet" href="css/pages/ticketResumo.css">
+    <link rel="stylesheet" href="css/components/popup.css">
+    <title>Ticket</title>
+</head>
+
+<body>
+  <header>
+
+    <img class="header-components-img" src="/assets/img/logo_banco_pan.png" alt="Logo Banco Pan" id="logoBancoPan"
+      data-dark-src="/assets/img/logo_banco_pan_dark.png">
+    <a href="index.html" class="linkIndex"><h1 class="header-components">PAN<span style="color: var(--color-grey-dark); font-size: var(--font-size-medium);">PEDIA</span></h1></a>
+    <i id="iconeBars" class="fa-solid fa-bars" onclick="switchMenu()"></i>
+    <nav class="menu menuIsClose" id="menu">
+      <div class="close">
+        <i class="fa-solid fa-circle-xmark" id="iconeFechar" onclick="switchMenu()"></i>
+      </div>
+      <div class="todos-itens">
+        <a class="menuItens" id="atalhoPesquisar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <h2>Pesquisar</h2>
+        </a>
+        <a class="menuItens">
+          <i class="fa-sharp fa-solid fa-book-open"></i>
+          <h2>Instruções</h2>
+        </a>
+        <a class="menuItens" id="abrirTicketOwner">
+          <i class="fa-sharp fa-solid fa-lock" id="ticketIcon"></i>
+          <h2>Tickets</h2>
+        </a>
+      </div>
+      <div class="theme-cursor" id="button-modo-escuro">
+        <a class="fa-sharp fa-solid fa-circle-half-stroke"></a>
+        <p>Modo Escuro</p>
+      </div>
+    </nav>
+  </header>
+    <main>
+        <div class="popup hidden">
+            <div class="popup-content">
+                <p>Solicitação feita com sucesso!</p>
+                <button class="close-button"><i class="fa-solid fa-circle-xmark"></i></button>
+            </div>
+        </div>
+
+        <h1 id="tituloTabela">Titulo</h1>
+        <div class="content">
+            <h2>Resumo das alterações:</h2>
+            <p id="resumoAlteracoes">SEM ALTERAÇÕES</p>
+        </div>
+        <div class="botoes">
+            <button class="btn" onclick="enviarTicket()">Confirmar</button>
+        </div>
+    </main>
+  
+    <script src="/assets/js/popup.js"></script>
+    <script src="/assets/js/ticketResumo.js"></script>
+    <script src="/assets/js/modoEscuro.js"></script>
+    <script src="/assets/js/menu.js"></script>
+</body>
+
+</html>

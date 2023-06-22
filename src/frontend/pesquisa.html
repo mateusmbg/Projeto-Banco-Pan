@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/root.css">
+  <link rel="stylesheet" href="css/pages/pesquisa.css">
+  <link rel="stylesheet" href="css/components/header-menu.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <title>Pesquisa</title>
+</head>
+
+<body>
+  <header>
+
+    <img class="header-components-img" src="/assets/img/logo_banco_pan.png" alt="Logo Banco Pan" id="logoBancoPan"
+      data-dark-src="/assets/img/logo_banco_pan_dark.png">
+    <a href="index.html" class="linkIndex"><h1 class="header-components">PAN<span style="color: var(--color-grey-dark); font-size: var(--font-size-medium);">PEDIA</span></h1></a>
+    <i id="iconeBars" class="fa-solid fa-bars" onclick="switchMenu()"></i>
+    <nav class="menu menuIsClose" id="menu">
+      <div class="close">
+        <i class="fa-solid fa-circle-xmark" id="iconeFechar" onclick="switchMenu()"></i>
+      </div>
+      <div class="todos-itens">
+        <a class="menuItens" id="atalhoPesquisar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <h2>Pesquisar</h2>
+        </a>
+        <a class="menuItens">
+          <i class="fa-sharp fa-solid fa-book-open"></i>
+          <h2>Instruções</h2>
+        </a>
+        <a class="menuItens" id="abrirTicketOwner">
+          <i class="fa-sharp fa-solid fa-lock" id="ticketIcon"></i>
+          <h2>Tickets</h2>
+        </a>
+      </div>
+      <div class="theme-cursor" id="button-modo-escuro">
+        <a class="fa-sharp fa-solid fa-circle-half-stroke"></a>
+        <p>Modo Escuro</p>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <form class="pesquisaForm">
+      <div class="pesquisaInput">
+        <i class="a fa-sharp fa-solid fa-magnifying-glass" style="margin: auto;"></i>
+        <input type="text" id="pesquisa" placeholder="Pesquisar tabela" class="textPesquisa">
+      </div>
+      <button class="pesquisaButton" hidden type="submit">Pesquisar</button>
+      <a><i title="Aplicar filtros na busca." id="imgDoFiltro" class="filter-i fa-solid fa-filter"
+          onclick="mostrarFiltro()"
+          style="color: var(--color-grey-dark);font-size: x-large;margin-left: 100%;cursor: pointer;"></i></a>
+    </form>
+    <br>
+    <div class="container text-center" id="divDosFiltros" style="display: none;">
+      <div class="row">
+        <div class="col">
+          <select class="form-select" aria-label="Default select example" id="selectConjuntoDeDados">
+            <option selected disabled>Conjunto de dados</option>
+            <option value="Adquirência">Adquirência</option>
+            <option value="Analytics">Analytics</option>
+            <option value="Atendimento">Atendimento</option>
+            <option value="Auditoria">Auditoria</option>
+            <option value="Banco Digital">Banco Digital</option>
+            <option value="Bureaux">Bureaux</option>
+            <option value="CRM">CRM</option>
+            <option value="Cadastro">Cadastro</option>
+            <option value="Cadastro Positivo">Cadastro Positivo</option>
+            <option value="Captação">Captação</option>
+            <option value="Cartões">Cartões</option>
+            <option value="Cheque Especial">Cheque Especial</option>
+            <option value="Compliance">Compliance</option>
+            <option value="Compras">Compras</option>
+            <option value="Consignado">Consignado</option>
+            <option value="Contábil">Contábil</option>
+            <option value="Crédito">Crédito</option>
+            <option value="Empréstimo Pessoal">Empréstimo Pessoal</option>
+            <option value="Engenheiro de Dados">Engenheiro de Dados</option>
+            <option value="Formalização">Formalização</option>
+            <option value="Fraudes">Fraudes</option>
+            <option value="Governança de TI">Governança de TI</option>
+            <option value="Informações Estratégicas">Informações Estratégicas</option>
+            <option value="Investimentos">Investimentos</option>
+            <option value="Jurídico">Jurídico</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Marketplace">Marketplace</option>
+            <option value="Open Finance">Open Finance</option>
+            <option value="Operações">Operações</option>
+            <option value="PLD">PLD</option>
+            <option value="Pessoas">Pessoas</option>
+            <option value="Recuperação de Crédito">Recuperação de Crédito</option>
+            <option value="Reserva de Dados Técnicos">Reserva de Dados Técnicos</option>
+            <option value="Riscos">Riscos</option>
+            <option value="Saúde">Saúde</option>
+            <option value="Seguros">Seguros</option>
+            <option value="Veículos">Veículos</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <select class="form-select" aria-label="Default select example" id="selectDadosSensiveis">
+            <option selected disabled>Dados sensíveis</option>
+            <option value="N">Não contém dados sensíveis</option>
+            <option value="S">Contém dados sensíveis</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <select class="form-select" aria-label="Default select example" id="selectOwner">
+            <option selected disabled>Owner</option>
+            <option value="Ana">Ana</option>
+            <option value="André">André</option>
+            <option value="Antônia">Antônia</option>
+            <option value="Antônio">Antônio</option>
+            <option value="Carlos">Carlos</option>
+            <option value="Daniel">Daniel</option>
+            <option value="Edson">Edson</option>
+            <option value="Fabio">Fabio</option>
+            <option value="Fernando">Fernando</option>
+            <option value="Francisca">Francisca</option>
+            <option value="Francisco">Francisco</option>
+            <option value="Geraldo">Geraldo</option>
+            <option value="Joaquim">Joaquim</option>
+            <option value="Jorge">Jorge</option>
+            <option value="Josefa">Josefa</option>
+            <option value="José">José</option>
+            <option value="João">João</option>
+            <option value="Luis">Luis</option>
+            <option value="Luiz">Luiz</option>
+            <option value="Manoel">Manoel</option>
+            <option value="Marcelo">Marcelo</option>
+            <option value="Marcos">Marcos</option>
+            <option value="Maria">Maria</option>
+            <option value="Márcia">Márcia</option>
+            <option value="Márcio">Márcio</option>
+            <option value="Patrícia">Patrícia</option>
+            <option value="Pedro">Pedro</option>
+          </select>
+        </div>
+
+        <div class="col">
+          <select class="form-select" aria-label="Default select example" id="selectSteward">
+            <option selected disabled>Steward</option>
+            <option value="Ana Julia">Ana Julia</option>
+            <option value="Ana Luiza">Ana Luiza</option>
+            <option value="Arthur">Arthur</option>
+            <option value="Beatriz">Beatriz</option>
+            <option value="Caio">Caio</option>
+            <option value="Cauã">Cauã</option>
+            <option value="Davi">Davi</option>
+            <option value="Eduardo">Eduardo</option>
+            <option value="Gabriel">Gabriel</option>
+            <option value="Giovanna">Giovanna</option>
+            <option value="Helena">Helena</option>
+            <option value="Heloísa">Heloísa</option>
+            <option value="Henrique">Henrique</option>
+            <option value="Isaac">Isaac</option>
+            <option value="Isabelly">Isabelly</option>
+            <option value="Isadora">Isadora</option>
+            <option value="João Pedro">João Pedro</option>
+            <option value="Lara">Lara</option>
+            <option value="Letícia">Letícia</option>
+            <option value="Lorena">Lorena</option>
+            <option value="Lorenzo">Lorenzo</option>
+            <option value="Luiza">Luiza</option>
+            <option value="Lívia">Lívia</option>
+            <option value="Maria Eduarda">Maria Eduarda</option>
+            <option value="Maria Luiza">Maria Luiza</option>
+            <option value="Mariana">Mariana</option>
+            <option value="Melissa">Melissa</option>
+            <option value="Miguel">Miguel</option>
+            <option value="Murilo">Murilo</option>
+            <option value="Pedro Henrique">Pedro Henrique</option>
+            <option value="Pietro">Pietro</option>
+            <option value="Samuel">Samuel</option>
+            <option value="Sarah">Sarah</option>
+            <option value="Valentina">Valentina</option>
+            <option value="Vinicius">Vinicius</option>
+            <option value="Vitor">Vitor</option>
+            <option value="Yasmin">Yasmin</option>
+          </select>
+        </div>
+      </div>
+  </main>
+  <section id="resultadosPesquisa">
+    <div id="resultados"></div>
+  </section>
+  <footer>
+    <nav id="paginacao" aria-label="Navegação de página exemplo">
+      <ul class="pagination">
+        <li class="page-item">
+          <a id="botaoVoltarPagina" class="page-link" aria-label="Anterior">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Anterior</span>
+          </a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" id="paginaAtual"></a>
+        </li>
+        <li class="page-item">
+          <a id="botaoAvancarPagina" class="page-link" aria-label="Próximo">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Próximo</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </footer>
+</body>
+<script src="/assets/js/pesquisar.js"></script>
+<script src="/assets/js/menu.js"></script>
+<script src="/assets/js/modoEscuro.js"></script>
+
+</html>

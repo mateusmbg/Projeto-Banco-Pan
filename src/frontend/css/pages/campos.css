@@ -1,0 +1,72 @@
+/* define a cor html com a variável --color-white */
+html {
+    background: var(--color-white);
+}
+/* define a altura do body como 100% da viewport */
+body {
+    min-height: 100vh;
+}
+/* define a altura do main como 90% da viewport e define as margens */
+main {
+    width: 90%;
+    margin: auto;
+    margin-top: 2rem;
+}
+/* div com os campos da tabela */
+.table {
+    color: var(--color-grey-dark);
+    text-align: center;
+    border: 1px solid var(--color-primary);
+    border-radius: 20px;
+    padding: 1rem;
+}
+/* espaçamento entre os campos */
+.row {
+    margin-bottom: 1rem;
+}
+/* icones dos botões de mais informações */
+.fa-solid.fa-plus, .fa-solid.fa-minus {
+    cursor: pointer;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 7px 30px;
+}
+
+.fa-solid.fa-plus:hover, .fa-solid.fa-minus:hover {
+    background: var(--color-primary-click);
+    transition: .4s ease-in;
+}
+/* ocultar modelo */
+#LinhaModelo {
+    display: none;
+}
+/* largura do indice  */
+.col-md-3-indice {
+    width: 10%;
+}
+/* largura do nome do campo, da descrição e botao de mais informações  */
+.col-md-3-maisInfo, .col-md-3-descricao, .col-md-3-nome {
+    width: 30%;
+}
+
+.col-md-3-descricao, .col-md-3-nome, #infoAdicional {
+    text-align: left;
+}
+/* mais informações sobre o campo  */
+.col-md-12 p {
+    transition: .2s ease-in;
+    padding: 0;
+    width: 60%;
+    margin: auto;
+    font-size: 15px;
+}
+/* Rodapé */
+footer {
+    margin: 1rem;
+    text-align: center;
+}
+/* Clique aqui do footer */
+footer a {
+    cursor: pointer;
+    color: var(--color-primary) !important;
+}

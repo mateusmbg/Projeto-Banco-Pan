@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/root.css">
+  <link rel="stylesheet" href="css/components/header-menu.css">
+  <link rel="stylesheet" href="css/pages/ticketGeral.css">
+  <title id="tituloTabelaPagina">Geral</title>
+</head>
+
+<body>
+  <header>
+
+    <img class="header-components-img" src="/assets/img/logo_banco_pan.png" alt="Logo Banco Pan" id="logoBancoPan"
+      data-dark-src="/assets/img/logo_banco_pan_dark.png">
+    <a href="index.html" class="linkIndex"><h1 class="header-components">PAN<span style="color: var(--color-grey-dark); font-size: var(--font-size-medium);">PEDIA</span></h1></a>
+    <i id="iconeBars" class="fa-solid fa-bars" onclick="switchMenu()"></i>
+    <nav class="menu menuIsClose" id="menu">
+      <div class="close">
+        <i class="fa-solid fa-circle-xmark" id="iconeFechar" onclick="switchMenu()"></i>
+      </div>
+      <div class="todos-itens">
+        <a class="menuItens" id="atalhoPesquisar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <h2>Pesquisar</h2>
+        </a>
+        <a class="menuItens">
+          <i class="fa-sharp fa-solid fa-book-open"></i>
+          <h2>Instruções</h2>
+        </a>
+        <a class="menuItens" id="abrirTicketOwner">
+          <i class="fa-sharp fa-solid fa-lock" id="ticketIcon"></i>
+          <h2>Tickets</h2>
+        </a>
+      </div>
+      <div class="theme-cursor" id="button-modo-escuro">
+        <a class="fa-sharp fa-solid fa-circle-half-stroke"></a>
+        <p>Modo Escuro</p>
+      </div>
+    </nav>
+  </header>
+  <main>
+    <h1 id="tituloTabela"></h1>
+
+    <form action="post">
+      <p for="grupo">Selecione um grupo:</p>
+      <select id="grupo" class="form-select" name="grupo">
+        <option value="descricao" selected>Descrição da tabela</option>
+        <option value="responsaveis">Responsáveis Pelos Dados</option>
+        <option value="disponibilidade">Disponibilidade e Atualização</option>
+        <option value="sustentacao">Sustentação e Detalhes da Tabela</option>
+        <option value="origem">Informações De Origem Da Tabela</option>
+        <option value="campos">Campos da Tabela</option>
+      </select>
+
+      <div id="descricao" class="content">
+        <h3>Descrição da tabela</h3>
+        <textarea id="conteudoTabela" name="conteudoTabela"></textarea>
+      </div>
+
+      <div id="responsaveis" class="content">
+        <h3>Responsáveis Pelos Dados</h3>
+        <p>Conjunto de dados:</p>
+        <textarea id="conjuntoDeDados" name="conjuntoDeDados"></textarea>
+        <p>Owner:</p>
+        <textarea id="nomeDataOwner" name="nomeDataOwner"></textarea>
+        <p>Steward:</p>
+        <textarea id="nomeDataSteward" name="nomeDataSteward"></textarea>
+      </div>
+
+      <div id="disponibilidade" class="content">
+        <h3>Disponibilidade e Atualização</h3>
+        <p>Data de Criação:</p>
+        <textarea id="dataDeCriacao" name="dataDeCriacao"></textarea>
+        <p>Defasagem:</p>
+        <textarea id="defasagemTabela" name="defasagemTabela"></textarea>
+        <p>Frequência de atualização:</p>
+        <textarea id="Frequencia" name="Frequencia"></textarea>
+      </div>
+
+      <div id="sustentacao" class="content">
+        <h3>Sustentação e Detalhes da Tabela</h3>
+        <p>Engenheiro responsável pela ingestão:</p>
+        <textarea id="engIngestaoTabela" name="engIngestaoTabela"></textarea>
+        <p>Database:</p>
+        <textarea id="infoDatabaseTabela" name="infoDatabaseTabela"></textarea>
+        <p>Caminho Tabela:</p>
+        <textarea id="caminhoTabela" name="caminhoTabela"></textarea>
+      </div>
+
+      <div id="origem" class="content">
+        <h3>Informações De Origem Da Tabela</h3>
+        <p>Nome da Tabela na Origem:</p>
+        <textarea id="tabelaOrigem" name="tabelaOrigem"></textarea>
+        <p>Database origem:</p>
+        <textarea id="databaseOrigem" name="databaseOrigem"></textarea>
+        <p>Schema:</p>
+        <textarea id="schemaOrigem" name="schemaOrigem"></textarea>
+        <p>Sistema:</p>
+        <textarea id="sistemaOrigem" name="sistemaOrigem"></textarea>
+        <p>Servidor:</p>
+        <textarea id="servidorOrigem" name="servidorOrigem"></textarea>
+      </div>
+
+      <div id="campos" class="table content">
+        <div class="textFixed row">
+          <div class="col-md-3 indice">
+            Índice
+          </div>
+          <div class="col-md-3 nome">
+            Nome do Campo
+          </div>
+          <div class="col-md-3 descricao">
+            Descrição do Campo
+          </div>
+          <div class="col-md-3 maisInfo">
+            Mais Informações
+          </div>
+        </div>
+
+        <div class="textTituloCampo row" id="LinhaModelo">
+          <div class="divisoria"></div>
+          <div class="col-md-3 indice" id="indice">
+          </div>
+          <div class="col-md-3 nome" id="nomeCampo">
+          </div>
+          <div class="col-md-3 descricao" id="descricao_Campo" name="descricao_Campo"></div>
+          <div class="col-md-3 maisInfo">
+            <i class="fa-solid fa-plus" id="botao"></i>
+          </div>
+        </div>
+
+        <div class="row additional-info col-md-12 mais-info" id="infoAdicional" style="display: none;">
+            <p>Descrição do Campo:</p>
+            <textarea class="col-md-3" id="descricaoCampo" name="descricaoCampo"></textarea>
+            <p>Tipo campo:</p>
+            <textarea type="text" id="tipoCampo" name="tipoCampo"></textarea>
+            <p>Tipo pessoa:</p>
+            <textarea type="text" id="tipoPessoa" name="tipoPessoa"></textarea>
+            <p>Chave primária:</p>
+            <textarea type="text" id="chavePrimaria" name="chavePrimaria"></textarea>
+            <p>Null campo:</p>
+            <textarea type="text" id="nullCampo" name="nullCampo"></textarea>
+            <p>Unq:</p>
+            <textarea type="text" id="unq" name="unq"></textarea>
+            <p>Volátil:</p>
+            <textarea type="text" id="volatil" name="volatil"></textarea>
+            <p>LGPD:</p>
+            <textarea type="text" id="lgpd" name="lgpd"></textarea>
+            <p>Amostra:</p>
+            <textarea type="text" id="amostraCampo" name="amostraCampo"></textarea>
+        </div>
+      </div>
+    </form>
+    <button id="RevisarBtn" type="submit" onclick="exibirResumoAlteracoes()">Revisar</button>
+  </main>
+
+  <script src="/assets/js/ticketGeral.js"></script>
+  <script src="/assets/js/modoEscuro.js"></script>
+  <script src="/assets/js/menu.js"></script>
+  <script src="/assets/js/dropdown.js"></script>
+</body>
+</html>
