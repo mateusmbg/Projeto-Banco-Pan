@@ -23,6 +23,7 @@ form {
     border: 1px solid var(--color-primary);
     border-radius: 200px;
     color: var(--color-primary);
+    display: flex;
     min-width: 70%;
 }
 /* texto que o usuário escreveu no input */
@@ -41,6 +42,7 @@ input[type="text"] {
     border: none;
     background-color: transparent;
     flex-grow: 1;
+    width: 100%;
     font-size: 16px;
 }
 /* div que aparece todos os resultados para a pesquisa */

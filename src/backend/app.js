@@ -27,7 +27,7 @@ app.use(bodyParser.text({ type: 'text/plain' }));
 // Configuração do servidor para lidar com requisições codificadas em URL
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// Início do endpoint "/pesquisa" que utiliza o método GET
+// Endpoint "/pesquisa" que utiliza o método GET para realizar a pesquisa nas tabelas de acordo com os termos digitados
 app.get('/pesquisa', (req, res) => {
     // Configuração do código de status HTTP para 200 (Ok)
     res.statusCode = 200;
@@ -122,58 +122,82 @@ FROM
     });
 });
 
-
+// Endpoint '/resultado' que utiliza o método GET para puxar as informações da tabela solicitada
 app.get('/resultado', (req, res) => {
+    // Configuração do código de status HTTP para 200 (Ok)
     res.statusCode = 200;
+    // Configuração dos headers para permitir requisições de qualquer origem
     res.setHeader('Access-Control-Allow-Origin', '*');
 
+    // Extrai o id numérico dos parâmetros da requisição
     const idNumerico = req.query.id_numerico;
 
+    // Construção da consulta SQL
     const sql = `SELECT * FROM cat_dados_tabela JOIN cat_dados_owner ON cat_dados_tabela.conjunto_de_dados = cat_dados_owner.conjunto_de_dados JOIN cat_dados_conexoes ON cat_dados_tabela.id_tabela = cat_dados_conexoes.id_tabela WHERE cat_dados_tabela.id_numerico = ${idNumerico}`;
 
-    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    // Cria uma nova conexão com o banco de dados
+    var db = new sqlite3.Database(DBPATH);
+    // Executa a consulta SQL e retorna os resultados
     db.all(sql, [], (err, rows) => {
+        // Caso haja erro, lança o erro
         if (err) {
             throw err;
         }
+        // Se não houver erro, retorna os resultados da consulta como resposta JSON
         res.json(rows);
 
-        // Fecha o banco
+        // Fecha a conexão com o banco de dados
         db.close();
     });
 });
 
+
+// Endpoint '/campos' que utiliza o método GET para puxar as informações dos campos da tabela solicitada
 app.get('/campos', (req, res) => {
+    // Configuração do código de status HTTP para 200 (Ok)
     res.statusCode = 200;
+    // Configuração dos headers para permitir requisições de qualquer origem
     res.setHeader('Access-Control-Allow-Origin', '*');
+    // Construção da consulta SQL para obter os campos
     sql = "SELECT * FROM cat_dados_variaveis JOIN cat_dados_tabela ON cat_dados_variaveis.id_tabela = cat_dados_tabela.id_tabela WHERE id_numerico=" + req.query.id_numerico;
-    var db = new sqlite3.Database(DBPATH); // Abre o banco
+
+    // Cria uma nova conexão com o banco de dados
+    var db = new sqlite3.Database(DBPATH);
+    // Executa a consulta SQL e retorna os resultados
     db.all(sql, [], (err, rows) => {
+        // Caso haja erro, lança o erro
         if (err) {
             throw err;
         }
+        // Se não houver erro, retorna os resultados da consulta como resposta JSON
         res.json(rows);
     });
-    // Fecha o banco
+    // Fecha a conexão com o banco de dados
     db.close();
 });
 
+// Endpoint '/tabela/nome' que utiliza o método GET para puxar o nome da tabela solicitada
 app.get('/tabela/nome', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
+    // Construção da consulta SQL para obter o nome da tabela
     var sql = "SELECT nome_tabela FROM cat_dados_tabela WHERE id_numerico=" + req.query.id_numerico;
+    // Cria uma nova conexão com o banco de dados
     var db = new sqlite3.Database(DBPATH); // Abre o banco
+    // Executa a consulta SQL e retorna os resultados
     db.all(sql, [], (err, rows) => {
+        // Caso haja erro, lança o erro
         if (err) {
             throw err;
         }
+        // Se não houver erro, retorna os resultados da consulta como resposta JSON
         res.json(rows);
     });
-    // Fecha o banco
+    // Fecha a conexão com o banco de dados
     db.close();
 });
 
-// Endpoint para solicitação de ticket de alteração de dados
+// Endpoint '/ticket/solicitacao' que utiliza o método POST para criar um ticket de solicitação de alteração de dados
 app.post('/ticket/solicitacao', (req, res) => {
     res.statusCode = 200;
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -194,8 +218,11 @@ app.post('/ticket/solicitacao', (req, res) => {
     // Executa a lógica de atualização no banco de dados
     const sql = `INSERT INTO ticket (nome, email, motivo, id_numerico, update_query, status, resumo) VALUES ('${nome}', '${email}', '${motivo}', '${id_numerico}', '${update_query.replace(/'/g, "''")}', '${status}', '${resumo}')`;
 
+    // Cria uma nova conexão com o banco de dados
     var db = new sqlite3.Database(DBPATH); // Abre o banco
-    db.run(sql, [], function (err) {
+    // Executa a consulta SQL e retorna os resultados
+    db.all(sql, [], (err, rows) => {
+        // Caso haja erro, lança o erro
         if (err) {
             throw err;
         }
@@ -207,45 +234,69 @@ app.post('/ticket/solicitacao', (req, res) => {
     });
 });
 
+// Endpoint '/ticket/pendente' que utiliza o método GET para puxar as informações dos tickets com status pendente
 app.get('/ticket/pendente', (req, res) => {
+    // Configuração do código de status HTTP para 200 (Ok)
     res.statusCode = 200;
+    // Configuração dos headers para permitir requisições de qualquer origem
     res.setHeader('Access-Control-Allow-Origin', '*');
     sql = "SELECT * FROM ticket JOIN cat_dados_tabela ON ticket.id_numerico = cat_dados_tabela.id_numerico WHERE status = 'pendente'";
+    // Cria uma nova conexão com o banco de dados
     var db = new sqlite3.Database(DBPATH); // Abre o banco
+    // Executa a consulta SQL e retorna os resultados
     db.all(sql, [], (err, rows) => {
+        // Caso haja erro, lança o erro
         if (err) {
             throw err;
         }
+        // Se não houver erro, retorna os resultados da consulta como resposta JSON
         res.json(rows);
     });
-    // Fecha o banco
+    // Fecha a conexão com o banco de dados
     db.close();
 });
 
+// Endpoint '/ticket/apagar' que utiliza o método PUT para atualizar o status do ticket para rejeitado
 app.put('/ticket/apagar', urlencodedParser, (req, res) => {
+    // Configuração do código de status HTTP para 200 (Ok)
     res.statusCode = 200;
+    // Configuração dos headers para permitir requisições de qualquer origem
     res.setHeader('Access-Control-Allow-Origin', '*');
-    var db = new sqlite3.Database(DBPATH); // Abre o banco
     sql = "UPDATE ticket SET status='rejeitado' WHERE id_ticket=" + req.body.id_ticket;
     console.log(sql)
-    db.run(sql, [], err => {
+    // Cria uma nova conexão com o banco de dados
+    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    // Executa a consulta SQL e retorna os resultados
+    db.all(sql, [], (err, rows) => {
+        // Caso haja erro, lança o erro
         if (err) {
             throw err;
         }
+        // Se não houver erro, retorna os resultados da consulta como resposta JSON
+        res.json(rows);
     });
-    db.close(); // Fecha o banco
-    res.end();
+    // Fecha a conexão com o banco de dados
+    db.close();
 });
 
+// Endpoint '/ticket/aprovar' que utiliza o método PUT para atualizar o status do ticket para aprovado
 app.put('/ticket/aprovar', urlencodedParser, (req, res) => {
+    // Configuração do código de status HTTP para 200 (Ok)
     res.statusCode = 200;
+    // Configuração dos headers para permitir requisições de qualquer origem
     res.setHeader('Access-Control-Allow-Origin', '*');
-    var db = new sqlite3.Database(DBPATH); // Abre o banco
 
+    // Definição da consulta SQL para atualizar o status do ticket para 'aprovado'
     var consultaSQL = "UPDATE ticket SET status='aprovado' WHERE id_ticket=" + req.body.id_ticket;
+    // Armazena a consulta de atualização enviada na requisição
     var consultaUpdate = req.body.update_query;
 
+    // Cria uma nova conexão com o banco de dados
+    var db = new sqlite3.Database(DBPATH);
+
+    // Executa a consulta SQL para atualizar o status do ticket
     db.run(consultaSQL, [], erroConsulta => {
+        // Em caso de erro na execução da consulta, registra o erro, retorna uma mensagem de erro e fecha a conexão com o banco
         if (erroConsulta) {
             console.error('Erro ao executar a consulta:', erroConsulta);
             res.status(500).json({ error: 'Ocorreu um erro ao aprovar o ticket.' });
@@ -253,113 +304,162 @@ app.put('/ticket/aprovar', urlencodedParser, (req, res) => {
             return;
         }
 
+        // Se uma consulta de atualização foi fornecida na requisição
         if (consultaUpdate) {
-            var queries = consultaUpdate.split(';'); // Divide as queries separadas por ponto e vírgula
-            queries = queries.map(query => query.trim()); // Remove espaços em branco extras
+            // Divide as queries separadas por ponto e vírgula
+            var queries = consultaUpdate.split(';');
+            // Remove espaços em branco extras
+            queries = queries.map(query => query.trim());
 
+            // Armazena a quantidade total de queries para serem executadas
             var totalQueries = queries.length;
+            // Contador para o número de queries já executadas
             var queriesExecutadas = 0;
+            // Flag para indicar se ocorreu algum erro durante a execução das queries de atualização
             var erroUpdateOcorreu = false;
 
+            // Loop por todas as queries de atualização
             queries.forEach(query => {
+                // Se a query não está vazia
                 if (query) {
+                    // Executa a query
                     db.run(query, [], erroUpdate => {
+                        // Incrementa o contador de queries executadas
                         queriesExecutadas++;
+                        // Se houve um erro na execução da query, registra o erro e define a flag de erro como verdadeira
                         if (erroUpdate) {
                             console.error('Erro ao executar a consulta de atualização:', erroUpdate);
                             erroUpdateOcorreu = true;
                         }
 
+                        // Se todas as queries foram executadas
                         if (queriesExecutadas === totalQueries) {
+                            // Se ocorreu algum erro, retorna uma mensagem de erro
                             if (erroUpdateOcorreu) {
                                 res.status(500).json({ error: 'Ocorreu um erro ao executar a consulta de atualização.' });
                             } else {
+                                // Se não houve erros, retorna uma mensagem de sucesso
                                 res.json({ message: 'Ticket aprovado com sucesso.' });
                             }
+                            // Fecha a conexão com o banco de dados
                             db.close();
                         }
                     });
                 } else {
+                    // Se a query está vazia, apenas incrementa o contador de queries executadas
                     queriesExecutadas++;
+                    // Se todas as queries foram executadas
                     if (queriesExecutadas === totalQueries) {
+                        // Se ocorreu algum erro, retorna uma mensagem de erro
                         if (erroUpdateOcorreu) {
                             res.status(500).json({ error: 'Ocorreu um erro ao executar a consulta de atualização.' });
                         } else {
+                            // Se não houve erros, retorna uma mensagem de sucesso
                             res.json({ message: 'Ticket aprovado com sucesso.' });
                         }
+                        // Fecha a conexão com o banco de dados
                         db.close();
                     }
                 }
             });
         } else {
-            res.json({ message: 'Ticket aprovado com sucesso.' });
+            // Se não houve consulta de atualização na requisição, apenas fecha a conexão com o banco de dados
             db.close();
         }
     });
 });
 
 
-
-
-
+// Endpoint '/estrelinhas/:id' que utiliza o método GET para puxar as informações de classificação do admin para a tabela solicitada
 app.get('/estrelinhas/:id', (req, res) => {
+    // Configuração do código de status HTTP para 200 (Ok)
+    res.statusCode = 200;
+    // Configuração dos headers para permitir requisições de qualquer origem
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    // Pega o ID da classificação dos parâmetros da requisição
     const idClassificacao = req.params.id;
-    res.statusCode = 200;
-    res.setHeader('Access-Control-Allow-Origin', '*');
+    // Cria a consulta SQL para obter a classificação do admin para o ID fornecido
     sql = `SELECT classificacao_admin FROM feedback WHERE id_numerico = ${idClassificacao}`;
+    // Cria uma nova conexão com o banco de dados
     var db = new sqlite3.Database(DBPATH); // Abre o banco
+    // Executa a consulta SQL e retorna os resultados
     db.all(sql, [], (err, rows) => {
+        // Caso haja erro, lança o erro
         if (err) {
             throw err;
         }
+        // Se não houver erro, retorna os resultados da consulta como resposta JSON
         res.json(rows);
     });
-    // Fecha o banco
+    // Fecha a conexão com o banco de dados
     db.close();
 });
 
+// Endpoint '/attClassificacao' que utiliza o método PUT para atualizar a classificação do admin para a tabela solicitada
 app.put('/attClassificacao', urlencodedParser, (req, res) => {
+    // Configuração do código de status HTTP para 200 (Ok)
     res.statusCode = 200;
+    // Configuração dos headers para permitir requisições de qualquer origem
     res.setHeader('Access-Control-Allow-Origin', '*');
-    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    // Cria a consulta SQL para atualizar a classificação do admin para o ID fornecido
     sql = `UPDATE feedback SET classificacao_admin = ${req.body.classificacao_admin} WHERE id_numerico = ${req.body.id_numerico};`;
+    // Cria uma nova conexão com o banco de dados
+    var db = new sqlite3.Database(DBPATH);
     db.run(sql, [], err => {
         if (err) {
             throw err;
         }
     });
-    db.close(); // Fecha o banco
+    db.close();
     res.end();
 });
 
+// Endpoint '/joinha/:id' que utiliza o método GET para puxar as informações de feedback do colaborador para a tabela solicitada
 app.get('/joinha/:id', (req, res) => {
-    const idJoinha = req.params.id;
+    // Configuração do código de status HTTP para 200 (Ok)
     res.statusCode = 200;
+    // Configuração dos headers para permitir requisições de qualquer origem
     res.setHeader('Access-Control-Allow-Origin', '*');
+    // Pega o ID do feedback dos parâmetros da requisição
+    const idJoinha = req.params.id;
+    // Cria a consulta SQL para obter o feedback do colaborador para o ID fornecido
     sql = `SELECT qtd_like_colaborador FROM feedback WHERE id_numerico = ${idJoinha}`;
-    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    // Cria uma nova conexão com o banco de dados
+    var db = new sqlite3.Database(DBPATH);
+    // Executa a consulta SQL e retorna os resultados
     db.all(sql, [], (err, rows) => {
+        // Caso haja erro, lança o erro
         if (err) {
             throw err;
         }
+        // Se não houver erro, retorna os resultados da consulta como resposta JSON
         res.json(rows);
     });
-    // Fecha o banco
+    // Fecha a conexão com o banco de dados
     db.close();
 });
 
+// Endpoint '/attJoinha' que utiliza o método PUT para atualizar o feedback do colaborador para a tabela solicitada
 app.put('/attJoinha', urlencodedParser, (req, res) => {
+    // Configuração do código de status HTTP para 200 (Ok)
     res.statusCode = 200;
+    // Configuração dos headers para permitir requisições de qualquer origem
     res.setHeader('Access-Control-Allow-Origin', '*');
-    var db = new sqlite3.Database(DBPATH); // Abre o banco
+    // Cria a consulta SQL para atualizar o feedback do colaborador para o ID fornecido
     sql = `UPDATE feedback SET qtd_like_colaborador = ${req.body.qtd_like_colaborador} WHERE id_numerico = ${req.body.id_numerico};`;
-    db.run(sql, [], err => {
+    // Cria uma nova conexão com o banco de dados
+    var db = new sqlite3.Database(DBPATH);
+    // Executa a consulta SQL e retorna os resultados
+    db.all(sql, [], (err, rows) => {
+        // Caso haja erro, lança o erro
         if (err) {
             throw err;
         }
+        // Se não houver erro, retorna os resultados da consulta como resposta JSON
+        res.json(rows);
     });
-    db.close(); // Fecha o banco
-    res.end();
+    // Fecha a conexão com o banco de dados
+    db.close();
 });
 
 // Inicialização do servidor web na porta e hostname definidos anteriormente

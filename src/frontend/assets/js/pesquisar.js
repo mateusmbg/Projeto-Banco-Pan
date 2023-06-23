@@ -108,6 +108,7 @@ const pesquisa = (paginaAtual) => {
 campoPesquisa.addEventListener('input', () => {
     chamaPesquisa();
 });
+
 [selectConjunto, selectDadosSensiveis, selectOwner, selectSteward].forEach((select) => {
     select.addEventListener('change', (event) => {
         event.preventDefault();
